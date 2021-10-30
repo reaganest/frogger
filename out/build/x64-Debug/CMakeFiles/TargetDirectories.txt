@@ -1,0 +1,9 @@
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/CMakeFiles/glad.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/CMakeFiles/asteroids.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/glfw-3.2/CMakeFiles/edit_cache.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/glfw-3.2/CMakeFiles/rebuild_cache.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/glfw-3.2/src/CMakeFiles/rebuild_cache.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/glfw-3.2/src/CMakeFiles/glfw.dir
+M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/glfw-3.2/src/CMakeFiles/edit_cache.dir

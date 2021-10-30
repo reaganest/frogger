@@ -1,0 +1,11 @@
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/out/build/x64-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):m:\programs\visualstudio\2019\community\common7\ide\commonextensions\microsoft\cmake\Ninja\ninja.exe cmTC_e5ac6 && [1/2] Building C object CMakeFiles\cmTC_e5ac6.dir\CheckIncludeFile.c.obj
+FAILED: CMakeFiles/cmTC_e5ac6.dir/CheckIncludeFile.c.obj 
+M:\Programs\VisualStudio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64\cl.exe  /nologo   /DWIN32 /D_WINDOWS /W3  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\cmTC_e5ac6.dir\CheckIncludeFile.c.obj /FdCMakeFiles\cmTC_e5ac6.dir\ /FS -c CheckIncludeFile.c
+CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory
+ninja: build stopped: subcommand failed.
+
+
+
