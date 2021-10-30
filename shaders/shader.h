@@ -9,7 +9,7 @@
 
 #include <string>
 
-std::string shader_path = "/Users/reaganesteves/Documents/GitHub/frogger/shaders/";
+extern std::string shader_path;
 
 
 #endif // __SHADER_H__
