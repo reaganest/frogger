@@ -26,13 +26,64 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         frog.hopDown();
 }
 
+// Helper functions
+
+// Checks collision with obstacles of current row
+bool overlaps(Frog * frog, std::vector < Obstacle > curRow){
+    
+    /*
+    iterate over every obstacle in the current row, figure out where its pixels are,
+    return true if frog's x position is in one of the obstacles
+    (screen is 640x480, so there are 640(?) possible pixel values, probably less
+    since the screen has borders
+    */
+}
+
+// Takes in frog object, current obstacle row, and frog's y position, outputs boolean
+bool died(Frog * frog, std::vector < Obstacle > curRow){
+    
+    bool hitCar = false;
+    // 10 is placeholder, want to check only the road
+    if (frog.ypos < 10){
+        if overlaps(frog, curRow)
+            hitCar = true;
+    }
+
+    bool inWater = true;
+    // 9 is placeholder, want to check only river
+    if (frog.ypos > 9){
+        if overlaps(frog,curRow)
+            inWater = false;
+    }
+    
+    if (inWater || hitCar)
+        return true;
+    return false;
+    
+}
+
+void endGame(){
+    // End the game; game over screen
+}
+
 //Calls update 5 times a second
 void animate()
 {
     if(glfwGetTime() > 0.2){
         glfwSetTime(0.0);
-        //frog.update_state();
-        //obstacles.update_states();
+        /*
+        if(frog.lives>0) {
+          frog.update_state();
+          obstacles.update_states();
+          if (died(frog, obstacles){
+            frog.lives -= 1;
+            //move frog back to start of level
+          }
+          updateTimer();
+        } else {
+          endgame();
+        }
+        */
     }
 }
 
