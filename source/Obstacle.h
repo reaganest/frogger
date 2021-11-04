@@ -6,8 +6,10 @@ class Obstacle {
     vec2 obstacles_vert[4]; //whatever number needed
     vec3 obstacles_color[4];
     struct {
-        vec2 cur_location;
-        vec2 velocity;
+        int xpos;
+        int ypos;
+        float velocity;
+        //add variable for type (e.g. log, snake, car, etc.)
     } state2;
     struct {
         GLuint vao;           //Vertex array object
@@ -21,12 +23,13 @@ public:
     Obstacle();
     
     void update_state();
+    int getXpos{ return xpos; }
+    int getYpos{ return ypos; }
+    float getVelocity{ return velocity; }
       
-      void gl_init();
+    void gl_init();
         
-      void draw(mat4 proj);
-    void move_obstacle(vec2 dist, vec2 * vert, Obstacle * obstacle);
-      
+    void draw(mat4 proj);
 };
 
 #endif /* defined(__Frog) */

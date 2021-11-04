@@ -13,10 +13,6 @@ Obstacle::Obstacle(){
 
 const int obstacle_size = { 4 };
 
-void Obstacle::move_obstacle(vec2 dist, vec2 * vert, Obstacle * obstacle){
-    // Update position
-}
-
 void Obstacle::update_state(){
     // Update position based on velocity and timestep
 }
