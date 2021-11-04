@@ -22,7 +22,7 @@ using namespace Angel;
 
 #include "shader.h"
 #include "Frog.h"
-#include "Mover.h"
+#include "Obstacle.h"
 
 
 
