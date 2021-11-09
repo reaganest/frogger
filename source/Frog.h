@@ -23,29 +23,29 @@ public:
     int xpos;
     int ypos;
     inline void hopRight(){
-        frog_vert[0].x+= .01;
-        frog_vert[1].x+= .01;
-        frog_vert[2].x+= .01;
-        frog_vert[3].x+= .01;
+        frog_vert[0].x+= 0.05;
+        frog_vert[1].x+= 0.05;
+        frog_vert[2].x+= 0.05;
+        frog_vert[3].x+= 0.05;
         }
     inline void hopLeft(){
-        frog_vert[0].x-= .01;
-        frog_vert[1].x-= .01;
-        frog_vert[2].x-= .01;
-        frog_vert[3].x-= .01;
+        frog_vert[0].x-= 0.05;
+        frog_vert[1].x-= 0.05;
+        frog_vert[2].x-= 0.05;
+        frog_vert[3].x-= 0.05;
     }
     inline void hopUp(){
-        frog_vert[0].y+= .01;
-        frog_vert[1].y+= .01;
-        frog_vert[2].y+= .01;
-        frog_vert[3].y+= .01;
+        frog_vert[0].y+= 0.06666667;
+        frog_vert[1].y+= 0.06666667;
+        frog_vert[2].y+= 0.06666667;
+        frog_vert[3].y+= 0.06666667;
         
     }
     inline void hopDown(){
-        frog_vert[0].y-= .01;
-        frog_vert[1].y-= .01;
-        frog_vert[2].y-= .01;
-        frog_vert[3].y-= .01;
+        frog_vert[0].y-= 0.06666667;
+        frog_vert[1].y-= 0.06666667;
+        frog_vert[2].y-= 0.06666667;
+        frog_vert[3].y-= 0.06666667;
         
     }
     void update_state();
