@@ -39,6 +39,7 @@ bool overlaps(Frog * frog, std::vector < Obstacle > curRow){
     (screen is 640x480, so there are 640(?) possible pixel values, probably less
     since the screen has borders
     */
+    return false; //temporary
 }
 
 // Takes in frog object, current obstacle row, and frog's y position, outputs boolean
