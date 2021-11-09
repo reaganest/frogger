@@ -6,8 +6,8 @@
 //
 //
 
-//#ifndef Asteroids_common_h
-//#define Asteroids_common_h
+#ifndef frogger_common_h
+#define frogger_common_h
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
