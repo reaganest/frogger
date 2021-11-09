@@ -6,4 +6,4 @@
 
 #include "shader.h"
 
-std::string shader_path = "M:/Code/Github/graphics2021/module-transformations-spider-tingles/Asteroids!/shaders/";
+std::string shader_path = "/Users/reaganesteves/Documents/GitHub/frogger/shaders/";

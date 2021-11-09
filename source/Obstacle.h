@@ -23,9 +23,9 @@ public:
     Obstacle();
     
     void update_state();
-    int getXpos{ return xpos; }
-    int getYpos{ return ypos; }
-    float getVelocity{ return velocity; }
+    //int getXpos{ return xpos };
+   // int getYpos{ return ypos };
+   // float getVelocity{ return velocity };
       
     void gl_init();
         

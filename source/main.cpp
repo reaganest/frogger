@@ -1,8 +1,10 @@
+//main
 #include "common.h"
 
 using namespace Angel;
 
 Frog frog;
+unsigned int number_of_deaths;
 // we could declare the other objects here too
 
 static void error_callback(int error, const char* description)
@@ -44,26 +46,41 @@ bool died(Frog * frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
     // 10 is placeholder, want to check only the road
-    if (frog.ypos < 10){
-        if overlaps(frog, curRow)
-            hitCar = true;
+    if (frog->ypos < 10){
+        //if overlaps(frog, curRow)
+            //hitCar = true;
+        
     }
 
     bool inWater = true;
     // 9 is placeholder, want to check only river
-    if (frog.ypos > 9){
-        if overlaps(frog,curRow)
-            inWater = false;
+    if (frog->ypos > 9){
+        //if overlaps(frog,curRow)
+          //  inWater = false;
+        
     }
     
     if (inWater || hitCar)
         return true;
     return false;
+    number_of_deaths++;
     
 }
 
 void endGame(){
+   if (number_of_deaths == 3) {
+        GLFWwindow* window;
+        glfwDestroyWindow(window);
+    
+   }
     // End the game; game over screen
+}
+void init(){
+  
+  glClearColor(0.0, 0.0, 0.0, 1.0);
+  glHint (GL_LINE_SMOOTH_HINT, GL_NICEST);
+  glHint (GL_POINT_SMOOTH_HINT, GL_NICEST);
+  frog.gl_init();
 }
 
 //Calls update 5 times a second
@@ -134,8 +151,9 @@ int main(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
      
-    //Draw all the sprites here 
-    //frog.draw(proj);
+    //Draw all the sprites here
+      frog.gl_init();
+    frog.draw(proj);
     //everything_else.draw(proj);
 
     glfwSwapBuffers(window);

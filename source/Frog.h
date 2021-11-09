@@ -20,16 +20,32 @@ class Frog {
     } GLvars;
 public:
     Frog();
+    int xpos;
+    int ypos;
     inline void hopRight(){
-        
-    }
+        frog_vert[0].x+= .01;
+        frog_vert[1].x+= .01;
+        frog_vert[2].x+= .01;
+        frog_vert[3].x+= .01;
+        }
     inline void hopLeft(){
-        
+        frog_vert[0].x-= .01;
+        frog_vert[1].x-= .01;
+        frog_vert[2].x-= .01;
+        frog_vert[3].x-= .01;
     }
     inline void hopUp(){
+        frog_vert[0].y+= .01;
+        frog_vert[1].y+= .01;
+        frog_vert[2].y+= .01;
+        frog_vert[3].y+= .01;
         
     }
     inline void hopDown(){
+        frog_vert[0].y-= .01;
+        frog_vert[1].y-= .01;
+        frog_vert[2].y-= .01;
+        frog_vert[3].y-= .01;
         
     }
     void update_state();
@@ -39,5 +55,6 @@ public:
       void draw(mat4 proj);
       
 };
+
 
 #endif /* defined(__Frog__) */
