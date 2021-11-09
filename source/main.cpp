@@ -42,12 +42,12 @@ bool overlaps(Frog * frog, std::vector < Obstacle > curRow){
     return false; //temporary
 }
 
-// Takes in frog object, current obstacle row, and frog's y position, outputs boolean
-bool died(Frog * frog, std::vector < Obstacle > curRow){
+// Takes in frog object, current obstacle row, and frog's y position, updates death variable
+void died(Frog * frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
     // 10 is placeholder, want to check only the road
-    if (frog->state.ypos < 10){
+    if (frog->ypos < 10){
         //if overlaps(frog, curRow)
             //hitCar = true;
         
@@ -55,25 +55,20 @@ bool died(Frog * frog, std::vector < Obstacle > curRow){
 
     bool inWater = true;
     // 9 is placeholder, want to check only river
-    if (frog->state.ypos > 9){
+    if (frog->ypos > 9){
         //if overlaps(frog,curRow)
           //  inWater = false;
         
     }
     
     if (inWater || hitCar)
-        return true;
+        number_of_deaths++;
 
-    return false;
-    number_of_deaths++;
 }
 
 void endGame(){
-   if (number_of_deaths == 3) {
-        GLFWwindow* window;
-        glfwDestroyWindow(window);
-    
-   }
+    GLFWwindow* window;
+    glfwDestroyWindow(window);
     // End the game; game over screen
 }
 void init(){
@@ -91,11 +86,11 @@ void animate()
         glfwSetTime(0.0);
         if(number_of_deaths<3) {
           frog.update_state();
-          obstacles.update_states();
-          bool died = died(frog, obstacles);
-          updateTimer();
+          //obstacles.update_states();
+          //died(frog, obstacles);
+          //updateTimer();
         } else {
-          endgame();
+          endGame();
           // move frog to start of level
         }
     }
