@@ -9,8 +9,10 @@ class Obstacle {
         int xpos;
         int ypos;
         float velocity;
-        //add variable for type (e.g. log, snake, car, etc.)
-    } state2;
+        int type;
+        // "type" refers to what the obstacle is:
+        // 0=car, 1=log, 2=turtle, 3=snake
+    } ob_state;
     struct {
         GLuint vao;           //Vertex array object
         GLuint program;       //shader program
@@ -20,12 +22,12 @@ class Obstacle {
         GLint M_location;     //Reference to matrix in shader
     } GLvars2;
 public:
-    Obstacle();
+    Obstacle(int type);
     
     void update_state();
-    int getXpos{ return xpos; }
-    int getYpos{ return ypos; }
-    float getVelocity{ return velocity; }
+    int getXpos(){ return xpos; }
+    int getYpos(){ return ypos; }
+    float getVelocity(){ return velocity; }
       
     void gl_init();
         

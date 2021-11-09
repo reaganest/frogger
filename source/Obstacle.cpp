@@ -2,9 +2,13 @@
 
 #include "common.h"
 
-//obstacle constructor
-Obstacle::Obstacle(){
-    //obstacle colors
+// obstacle constructor
+Obstacle::Obstacle(int type){
+    
+    // obstacle type
+    this->obj_state.type = type;
+
+    // obstacle colors
     obstacle_color[0] = vec3( 0.588, 0.294, 0.0 );
     obstacle_color[1] = vec3( 0.588, 0.294, 0.0 );
     obstacle_color[2] = vec3( 0.588, 0.294, 0.0 );
