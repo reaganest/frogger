@@ -22,30 +22,32 @@ public:
     Frog();
     int xpos;
     int ypos;
+    // hopRight and hopLeft controlled by 1/20 (by columns/width) * 2 for some reason
     inline void hopRight(){
-        frog_vert[0].x+= 0.05;
-        frog_vert[1].x+= 0.05;
-        frog_vert[2].x+= 0.05;
-        frog_vert[3].x+= 0.05;
+        frog_vert[0].x+= 0.1;
+        frog_vert[1].x+= 0.1;
+        frog_vert[2].x+= 0.1;
+        frog_vert[3].x+= 0.1;
         }
     inline void hopLeft(){
-        frog_vert[0].x-= 0.05;
-        frog_vert[1].x-= 0.05;
-        frog_vert[2].x-= 0.05;
-        frog_vert[3].x-= 0.05;
+        frog_vert[0].x-= 0.1;
+        frog_vert[1].x-= 0.1;
+        frog_vert[2].x-= 0.1;
+        frog_vert[3].x-= 0.1;
     }
+    // hopUp and hopDown controlled by 1/15 (by rows/height)
     inline void hopUp(){
-        frog_vert[0].y+= 0.06666667;
-        frog_vert[1].y+= 0.06666667;
-        frog_vert[2].y+= 0.06666667;
-        frog_vert[3].y+= 0.06666667;
+        frog_vert[0].y+= 0.13333333;
+        frog_vert[1].y+= 0.13333333;
+        frog_vert[2].y+= 0.13333333;
+        frog_vert[3].y+= 0.13333333;
         
     }
     inline void hopDown(){
-        frog_vert[0].y-= 0.06666667;
-        frog_vert[1].y-= 0.06666667;
-        frog_vert[2].y-= 0.06666667;
-        frog_vert[3].y-= 0.06666667;
+        frog_vert[0].y-= 0.13333333;
+        frog_vert[1].y-= 0.13333333;
+        frog_vert[2].y-= 0.13333333;
+        frog_vert[3].y-= 0.13333333;
         
     }
     void update_state();

@@ -3,8 +3,9 @@
 
 using namespace Angel;
 
-Frog frog;
-unsigned int number_of_deaths;
+Frog  frog;
+//Obstacle  obstacle;
+unsigned int number_of_deaths = 0;
 // we could declare the other objects here too
 
 static void error_callback(int error, const char* description)
@@ -28,7 +29,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         frog.hopDown();
 }
 
-// Helper functions
+// Useful functions
 
 // Checks collision with obstacles of current row
 bool overlaps(Frog * frog, std::vector < Obstacle > curRow){
@@ -39,6 +40,7 @@ bool overlaps(Frog * frog, std::vector < Obstacle > curRow){
     (screen is 640x480, so there are 640(?) possible pixel values, probably less
     since the screen has borders
     */
+    return false; //temporary
 }
 
 // Takes in frog object, current obstacle row, and frog's y position, outputs boolean
@@ -46,7 +48,7 @@ bool died(Frog * frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
     // 10 is placeholder, want to check only the road
-    if (frog->ypos < 10){
+    /*if (frog->state.ypos < 10){
         //if overlaps(frog, curRow)
             //hitCar = true;
         
@@ -54,17 +56,17 @@ bool died(Frog * frog, std::vector < Obstacle > curRow){
 
     bool inWater = true;
     // 9 is placeholder, want to check only river
-    if (frog->ypos > 9){
+    if (frog->state.ypos > 9){
         //if overlaps(frog,curRow)
           //  inWater = false;
         
-    }
+    } */
     
-    if (inWater || hitCar)
-        return true;
-    return false;
-    number_of_deaths++;
-    
+    //if (inWater || hitCar)
+     //   return true;
+
+   // return false;
+  //  number_of_deaths++;
 }
 
 void endGame(){
@@ -88,19 +90,15 @@ void animate()
 {
     if(glfwGetTime() > 0.2){
         glfwSetTime(0.0);
-        /*
-        if(frog.lives>0) {
+        if(number_of_deaths<3) {
           frog.update_state();
-          obstacles.update_states();
-          if (died(frog, obstacles){
-            frog.lives -= 1;
-            //move frog back to start of level
-          }
-          updateTimer();
+          //obstacle.update_state();
+        //  bool died = died(frog, obstacle);
+       //   updateTimer();
         } else {
-          endgame();
+            endGame();
+          // move frog to start of level
         }
-        */
     }
 }
 

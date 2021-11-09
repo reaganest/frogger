@@ -2,13 +2,17 @@
 
 #include "common.h"
 
-//obstacle constructor
-Obstacle::Obstacle(){
-    //obstacle colors
-    obstacle_color[0] = vec3( 0.588, 0.294, 0.0 );
-    obstacle_color[1] = vec3( 0.588, 0.294, 0.0 );
-    obstacle_color[2] = vec3( 0.588, 0.294, 0.0 );
-    obstacle_color[3] = vec3( 0.588, 0.294, 0.0 );
+// obstacle constructor
+Obstacle::Obstacle(int type){
+    
+    // obstacle type
+    this->ob_state.type = type;
+
+    // obstacle colors
+    obstacles_color[0] = vec3( 0.588, 0.294, 0.0 );
+    obstacles_color[1] = vec3( 0.588, 0.294, 0.0 );
+    obstacles_color[2] = vec3( 0.588, 0.294, 0.0 );
+    obstacles_color[3] = vec3( 0.588, 0.294, 0.0 );
 };
 
 const int obstacle_size = { 4 };
@@ -87,6 +91,6 @@ void Obstacle::draw(mat4 proj){
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     glBindVertexArray(0);
-    glUerProgram(0);
+    glUseProgram(0);
 
 }
