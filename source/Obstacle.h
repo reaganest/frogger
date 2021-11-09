@@ -11,7 +11,7 @@ class Obstacle {
         float velocity;
         int type;
         // "type" refers to what the obstacle is:
-        // 0=car, 1=log, 2=turtle, 3=snake
+        // 0=car, 1=log, 2=turtle, 3=gator, 4=snake
     } ob_state;
     struct {
         GLuint vao;           //Vertex array object
