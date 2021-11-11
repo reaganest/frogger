@@ -17,9 +17,8 @@ Obstacle::Obstacle(int type){
 
 const int obstacle_size = { 4 };
 
-void Obstacle::update_state(){
-    // Update position based on velocity and timestep
-}
+// Implemented in header
+//void Obstacle::update_state();
 
 void Obstacle::gl_init(){
   
