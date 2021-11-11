@@ -44,29 +44,28 @@ bool overlaps(Frog * frog, std::vector < Obstacle > curRow){
 }
 
 // Takes in frog object, current obstacle row, and frog's y position, outputs boolean
-bool died(Frog * frog, std::vector < Obstacle > curRow){
+void died(Frog * frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
     // 10 is placeholder, want to check only the road
-    /*if (frog->state.ypos < 10){
-        //if overlaps(frog, curRow)
-            //hitCar = true;
+    if (frog->ypos < 10){
+        if (overlaps(frog, curRow))
+            hitCar = true;
         
     }
 
     bool inWater = true;
     // 9 is placeholder, want to check only river
-    if (frog->state.ypos > 9){
-        //if overlaps(frog,curRow)
-          //  inWater = false;
-        
-    } */
+    if (frog->ypos > 9){
+        // overlaps checks Obstacles in row
+        if (overlaps(frog, curRow)) {
+            //TODO: need to account for turtles and gators.
+            inWater = false;
+        }
+    }
     
-    //if (inWater || hitCar)
-     //   return true;
-
-   // return false;
-  //  number_of_deaths++;
+    if (inWater || hitCar)
+        number_of_deaths++;
 }
 
 void endGame(){
