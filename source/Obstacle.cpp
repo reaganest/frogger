@@ -8,7 +8,20 @@ Obstacle::Obstacle(int type){
     // obstacle type
     this->ob_state.type = type;
 
-    // obstacle colors
+    switch(this->ob_state.type){
+        case(0):
+            // Car
+        case(1):
+            // Log
+        case(2):
+            // Turtle
+        case(3):
+            // Gator
+        case(4):
+            // Snake
+    }
+
+    // obstacle colors (will be different later)
     obstacles_color[0] = vec3( 0.588, 0.294, 0.0 );
     obstacles_color[1] = vec3( 0.588, 0.294, 0.0 );
     obstacles_color[2] = vec3( 0.588, 0.294, 0.0 );

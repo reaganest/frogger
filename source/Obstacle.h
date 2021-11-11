@@ -40,11 +40,17 @@ public:
         obstacles_vert[2].x += ob_state.velocity;
         obstacles_vert[3].x += ob_state.velocity;
         
-        //TODO: how do we deal with the snake turning?
         // Update xpos
         ob_state.xpos += ob_state.velocity;
+
         //TODO: updating turtle, gator, and snake's animation cycles
         // for turtles and gator, animation cycle affects hitboxes
+        /*
+        if (type>1) {
+            // update animations every so often
+            // update some variable that tells you whether surface is valid or not
+        }
+        */
 
     }
 
