@@ -19,14 +19,30 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 
     // Key callbacks for hopping: might end up modifying slightly
-    if (key == GLFW_KEY_LEFT && (action == GLFW_PRESS || action == GLFW_REPEAT))
-        frog.hopLeft();
-    if (key == GLFW_KEY_RIGHT && (action == GLFW_PRESS || action == GLFW_REPEAT))
-        frog.hopRight();
-    if (key == GLFW_KEY_UP && (action == GLFW_PRESS || action == GLFW_REPEAT))
-        frog.hopUp();
-    if (key == GLFW_KEY_DOWN && (action == GLFW_PRESS || action == GLFW_REPEAT))
-        frog.hopDown();
+    if (key == GLFW_KEY_LEFT) {
+        if (action == GLFW_PRESS)
+            frog.hopLeft();
+        else if ((action == GLFW_REPEAT) && (glfwGetTime()>0.17))
+            frog.hopLeft();
+    }
+    if (key == GLFW_KEY_RIGHT) {
+        if (action == GLFW_PRESS)
+            frog.hopRight();
+        else if ((action == GLFW_REPEAT) && (glfwGetTime()>0.17))
+            frog.hopRight();
+    }
+    if (key == GLFW_KEY_UP) {
+        if (action == GLFW_PRESS)
+            frog.hopUp();
+        else if ((action == GLFW_REPEAT) && (glfwGetTime()>0.17))
+            frog.hopUp();
+    }
+    if (key == GLFW_KEY_DOWN) {
+        if (action == GLFW_PRESS)
+            frog.hopDown();
+        else if ((action == GLFW_REPEAT) && (glfwGetTime()>0.17))
+            frog.hopDown();
+    }
 }
 
 // Useful functions
