@@ -1,0 +1,10 @@
+Target dependency graph (4 targets)
+glfw in FROGGER
+ZERO_CHECK in FROGGER
+glad in FROGGER, depends on:
+glfw in FROGGER (explicit)
+ZERO_CHECK in FROGGER (explicit)
+frogger in FROGGER, depends on:
+glad in FROGGER (explicit)
+glfw in FROGGER (explicit)
+ZERO_CHECK in FROGGER (explicit)

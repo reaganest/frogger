@@ -12,10 +12,10 @@ Frog::Frog(){
     frog_color[2] = vec3( 0.0, 1.0, 0.0);
     frog_color[3] = vec3( 0.0, 1.0, 0.0);
     
-    frog_vert[0] = vec2( -0.05, -0.86666667);
-    frog_vert[1] = vec2( 0.05, -0.86666667);
-    frog_vert[2] = vec2( -0.05, -1.0);
-    frog_vert[3] = vec2( 0.05, -1.0);
+    frog_vert[0] = vec2( 12.0, 2.0);
+    frog_vert[1] = vec2(11.0, 2.0);
+    frog_vert[2] = vec2(12.0, 3.0);
+    frog_vert[3] = vec2( 11.0 , 3.0);
 
 };
 
@@ -30,14 +30,14 @@ const int obstacle_size = { 4 };
 
 //Called everytime an animation tick happens
 void Frog::update_state(){
-    
-    
-    //if (died(frog,curRow)==true){
-       // frog_vert[0] = vec2( 0.2, 0.0);
-    //    frog_vert[1] = vec2( 0.0, 0.2);
-    //    frog_vert[2] = vec2( 0.2, 0.2);
-    //    frog_vert[3] = vec2( 0.0, 0.0);
-   // } */
+  /*  Frog * frog;
+    std::vector < Obstacle > curRow;
+ if (died(frog,curRow)==true){
+    frog_vert[0] = vec2( 0.2, 0.0);
+    frog_vert[1] = vec2( 0.0, 0.2);
+    frog_vert[2] = vec2( 0.2, 0.2);
+    frog_vert[3] = vec2( 0.0, 0.0); } */
+
 
 }
 
