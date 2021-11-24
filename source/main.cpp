@@ -48,7 +48,7 @@ void died(Frog * frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
     // 10 is placeholder, want to check only the road
-    /* if (frog->ypos < 10){
+    if (frog->ypos < 10){
         if (overlaps(frog, curRow))
             hitCar = true;
         
@@ -65,7 +65,7 @@ void died(Frog * frog, std::vector < Obstacle > curRow){
     }
     
     if (inWater || hitCar)
-        number_of_deaths++; */
+        number_of_deaths++;
 }
 
 void endGame(){
@@ -119,7 +119,7 @@ int main(void)
   
   
   // Change window size(?)
-  window = glfwCreateWindow(736, 736, "Frogger", NULL, NULL);
+  window = glfwCreateWindow(640, 480, "Frogger", NULL, NULL);
   if (!window){
     glfwTerminate();
     exit(EXIT_FAILURE);
@@ -141,7 +141,7 @@ int main(void)
     
     //Pick a coordinate system that makes the most sense to you
     //(left, right, top, bottom)
-    mat4 proj = Ortho2D(0.0, 23.0, 0.0, 23.0);
+    mat4 proj = Ortho2D(-1.0, 1.0, -1.0, 1.0);
     
     animate();
     
