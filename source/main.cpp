@@ -119,7 +119,7 @@ int main(void)
   
   
   // Change window size(?)
-  window = glfwCreateWindow(640, 480, "Frogger", NULL, NULL);
+  window = glfwCreateWindow(736, 736, "Frogger", NULL, NULL);
   if (!window){
     glfwTerminate();
     exit(EXIT_FAILURE);
@@ -141,7 +141,7 @@ int main(void)
     
     //Pick a coordinate system that makes the most sense to you
     //(left, right, top, bottom)
-    mat4 proj = Ortho2D(-1.0, 1.0, -1.0, 1.0);
+    mat4 proj = Ortho2D(0.0, 23.0, 0.0, 23.0);
     
     animate();
     
