@@ -30,12 +30,14 @@ public:
         frog_vert[1].x += 1.0;
         frog_vert[2].x += 1.0;
         frog_vert[3].x += 1.0;
-        }
+        state.xpos += 1;
+    }
     inline void hopLeft(){
         frog_vert[0].x -= 1.0;
         frog_vert[1].x -= 1.0;
         frog_vert[2].x -= 1.0;
         frog_vert[3].x -= 1.0;
+        state.xpos -= 1;
     }
     // hopUp and hopDown controlled by 1/21 (by rows/height)
     inline void hopUp(){
@@ -43,6 +45,7 @@ public:
         frog_vert[1].y += 1.0;
         frog_vert[2].y += 1.0;
         frog_vert[3].y += 1.0;
+        state.ypos += 1;
         
     }
     inline void hopDown(){
@@ -50,13 +53,14 @@ public:
         frog_vert[1].y -= 1.0;
         frog_vert[2].y -= 1.0;
         frog_vert[3].y -= 1.0;
+        state.ypos -= 1;
         
     }
     void update_state();
       
-      void gl_init();
+    void gl_init();
         
-      void draw(mat4 proj);
+    void draw(mat4 proj);
       
 };
 

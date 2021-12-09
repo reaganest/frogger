@@ -64,7 +64,7 @@ void died(Frog * frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
     // 10 is placeholder, want to check only the road
-    if (frog->ypos < 10){
+    if (frog->state.ypos < 10){
         if (overlaps(frog, curRow))
             hitCar = true;
         
@@ -72,7 +72,7 @@ void died(Frog * frog, std::vector < Obstacle > curRow){
 
     bool inWater = true;
     // 9 is placeholder, want to check only river
-    if (frog->ypos > 9){
+    if (frog->state.ypos > 9){
         // overlaps checks Obstacles in row
         if (overlaps(frog, curRow)) {
             //TODO: need to account for turtles and gators.
@@ -165,7 +165,7 @@ int main(void)
 
      
     //Draw all the sprites here
-      frog.gl_init();
+    frog.gl_init();
     frog.draw(proj);
     //everything_else.draw(proj);
 

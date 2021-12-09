@@ -12,10 +12,15 @@ Frog::Frog(){
     frog_color[2] = vec3( 0.0, 1.0, 0.0);
     frog_color[3] = vec3( 0.0, 1.0, 0.0);
     
+    //frog verts
     frog_vert[0] = vec2( 12.0, 2.0);
     frog_vert[1] = vec2(11.0, 2.0);
     frog_vert[2] = vec2(12.0, 3.0);
     frog_vert[3] = vec2( 11.0 , 3.0);
+
+    //frog position (based on bottom left corner)
+    state.xpos = 11;
+    state.ypos = 2;
 
 };
 
@@ -30,6 +35,25 @@ const int obstacle_size = { 4 };
 
 //Called everytime an animation tick happens
 void Frog::update_state(){
+  if((state.xpos)>22){
+    state.xpos = 0;
+    for(int i=0; i<4; i++){
+      if(i%2)
+        frog_vert[i].x = 1.0;
+      else 
+        frog_vert[i].x = 0.0;
+    }
+  }
+
+  if((state.xpos)<0){
+    state.xpos = 22;
+    for(int i=0; i<4; i++){
+      if(i%2)
+        frog_vert[i].x = 23.0;
+      else 
+        frog_vert[i].x = 22.0;
+    }
+  }
   /*  Frog * frog;
     std::vector < Obstacle > curRow;
  if (died(frog,curRow)==true){
