@@ -35,34 +35,28 @@ const int obstacle_size = { 4 };
 
 //Called everytime an animation tick happens
 void Frog::update_state(){
+  
+  // Screen Wrapping:
+  // Right side
   if((state.xpos)>22){
     state.xpos = 0;
-    for(int i=0; i<4; i++){
+    for(int i=0; i<frog_size; i++){
       if(i%2)
         frog_vert[i].x = 1.0;
       else 
         frog_vert[i].x = 0.0;
     }
   }
-
+  // Left Side
   if((state.xpos)<0){
     state.xpos = 22;
-    for(int i=0; i<4; i++){
+    for(int i=0; i<frog_size; i++){
       if(i%2)
         frog_vert[i].x = 23.0;
       else 
         frog_vert[i].x = 22.0;
     }
   }
-  /*  Frog * frog;
-    std::vector < Obstacle > curRow;
- if (died(frog,curRow)==true){
-    frog_vert[0] = vec2( 0.2, 0.0);
-    frog_vert[1] = vec2( 0.0, 0.2);
-    frog_vert[2] = vec2( 0.2, 0.2);
-    frog_vert[3] = vec2( 0.0, 0.0); } */
-
-
 }
 
 
@@ -70,8 +64,8 @@ void Frog::update_state(){
 void Frog::gl_init(){
   //Frog
   //!!!!!!!!Populate frog_vert and frog_color
-    size_t frog_bytes = 4*sizeof(frog_vert);
-    size_t frog_color_bytes = 4*sizeof(frog_color);
+  size_t frog_bytes = 4*sizeof(frog_vert);
+  size_t frog_color_bytes = 4*sizeof(frog_color);
   
   std::string vshader = shader_path + "vshader.glsl";
   std::string fshader = shader_path + "fshader.glsl";
@@ -126,7 +120,7 @@ void Frog::gl_init(){
   glVertexAttribPointer( GLvars.vpos_location, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
   glVertexAttribPointer( GLvars.vcolor_location, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(frog_bytes) );
   
-    glBindVertexArray(0);
+  glBindVertexArray(0);
 }
 
 

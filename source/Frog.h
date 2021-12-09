@@ -49,12 +49,13 @@ public:
         
     }
     inline void hopDown(){
-        frog_vert[0].y -= 1.0;
-        frog_vert[1].y -= 1.0;
-        frog_vert[2].y -= 1.0;
-        frog_vert[3].y -= 1.0;
-        state.ypos -= 1;
-        
+        if(state.ypos>2){
+            frog_vert[0].y -= 1.0;
+            frog_vert[1].y -= 1.0;
+            frog_vert[2].y -= 1.0;
+            frog_vert[3].y -= 1.0;
+            state.ypos -= 1;
+        }
     }
     void update_state();
       
