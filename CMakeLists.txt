@@ -34,6 +34,8 @@ add_executable(frogger WIN32 MACOSX_BUNDLE
 	source/utils/u8names.h
 	source/utils/u8names.cpp
 	shaders/shader.cpp
+	source/Obstacle.h
+	source/Obstacle.cpp
 	source/main.cpp
 	source/Frog.cpp
 	source/Frog.h 

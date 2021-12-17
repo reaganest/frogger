@@ -5,12 +5,13 @@
 #include "common.h"
 
 class Obstacle {
+public:
     vec2 obstacles_vert[4]; //whatever number needed
     vec3 obstacles_color[4];
     struct {
-        int xpos;
+        float xpos;
         int ypos;
-        float velocity; // Pixels per frame, include direction (- for left, + for right)
+        float velocity; // Blocks per frame, include direction (- for left, + for right)
         int type;
         // "type" refers to what the obstacle is:
         // 0=car, 1=log, 2=turtle, 3=gator, 4=snake
@@ -24,8 +25,7 @@ class Obstacle {
         GLint M_location;     //Reference to matrix in shader
     } GLvars2;
 
-public:
-    Obstacle(int type);
+    Obstacle(int type, float xpos, int ypos, float velocity);
     
     inline void update_state() {
         // Update shape's position
@@ -35,13 +35,38 @@ public:
         }
         */
         //This will work fine for now, ignore stuff above
-        obstacles_vert[0].x += ob_state.velocity;
-        obstacles_vert[1].x += ob_state.velocity;
-        obstacles_vert[2].x += ob_state.velocity;
-        obstacles_vert[3].x += ob_state.velocity;
-        
+
         // Update xpos
         ob_state.xpos += ob_state.velocity;
+        
+        //Screen Wrapping:
+        // Right side
+        if((ob_state.xpos)>22){
+            ob_state.xpos = 0;
+            for(int i=0; i<4; i++){
+                if(i%2)
+                    obstacles_vert[i].x = 1.0;
+                else
+                    obstacles_vert[i].x = 0.0;
+            }
+        }
+        
+        // Left side
+        if((ob_state.xpos)<0){
+            ob_state.xpos = 22;
+            for(int i=0; i<4; i++){
+                if(i%2)
+                    obstacles_vert[i].x = 23.0;
+                else
+                    obstacles_vert[i].x = 22.0;
+            }
+        }
+        
+        obstacles_vert[0].x = floor(ob_state.xpos) + 1;
+        obstacles_vert[1].x = floor(ob_state.xpos);
+        obstacles_vert[2].x = floor(ob_state.xpos) + 1;
+        obstacles_vert[3].x = floor(ob_state.xpos);
+        
 
         //TODO: updating turtle, gator, and snake's animation cycles
         // for turtles and gator, animation cycle affects hitboxes
@@ -59,7 +84,7 @@ public:
     float getVelocity(){ return ob_state.velocity; }
       
     void gl_init();
-        
+
     void draw(mat4 proj);
 };
 

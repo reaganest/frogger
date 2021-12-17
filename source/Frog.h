@@ -21,7 +21,6 @@ public:
         GLint vpos_location, vcolor_location;   //reference to pos and color in shaders
         GLint M_location;     //Reference to matrix in shader
     } GLvars;
-//public:
     Frog();
     
     // hopRight and hopLeft controlled by 1/21 (by columns/width) 
