@@ -129,8 +129,8 @@ void animate()
           frog.update_state();
           // Update state of all obstacles
           for(int i=0; i<23; i++){
-            for(int j=0; j<2; j++){
-                rows[i][j].update_state();
+            for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
+                (*it).update_state();
             }
           }
           // Checking if frog has reached goal
@@ -189,7 +189,7 @@ int main(void)
       std::vector<Obstacle> row;
       // Final row
       if(i>21)
-        row = {};
+        ;
       // River
       else if(i>16) {
         // Logs
@@ -207,9 +207,8 @@ int main(void)
       }
       
       //Break 2 (riverbank)
-      else if(i==16){
-        row.push_back(NULL);
-      }
+      else if(i==16)
+        ;
 
       // Road 2
       else if(i>9){
@@ -219,9 +218,8 @@ int main(void)
       }
 
       // Break 1 (middle of road)
-      else if(i==9){
-        row.push_back(NULL);
-      }
+      else if(i==9)
+        ;
 
       // Road 1
       else if(i>2){
@@ -230,9 +228,8 @@ int main(void)
         }
       }
 
-      else {
-        row.push_back(NULL);
-      }
+      else
+        ;
 
       /*
       for(int j=0; j<2; j++){
@@ -269,12 +266,11 @@ int main(void)
 
     // Drawing obstacles
     for(int i=0; i<23; i++){
+        if ((i==2) || ((i==9) || (i==16) || (i=22)))
         for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
             // Draw all obstacles
-            if(it[0] != NULL){
-              (*it).gl_init();
-              (*it).draw(proj);
-            }
+            (*it).gl_init();
+            (*it).draw(proj);
         }
     }
     
