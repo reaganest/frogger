@@ -137,7 +137,7 @@ void animate()
             // Check each
           //}
           //obstacle.update_state();
-          int curRow = (frog.state.ypos) - 1;
+          int curRow = frog.state.ypos;
           bool dead = died(frog, rows[curRow]);
           if(dead){
             frog.state.xpos = 11;
