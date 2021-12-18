@@ -3,18 +3,15 @@
 
 using namespace Angel;
 
+// Initialize frog
 Frog frog;
+// Initialize ows of obstacles
 std::vector< std::vector<Obstacle> > rows;
 
-// Initialize obstacles vector: first 9 entries cars, next 9 entries gators/turtles
-
-
-
-//Obstacle  obstacle;
+// Number of deaths (reset to 0 when game ends)
 unsigned int number_of_deaths = 0;
 // Keeps track of which ending spots are occupied
 bool occupied[5] = { false, false, false, false, false};
-// we could declare the other objects here too
 
 static void error_callback(int error, const char* description)
 {
@@ -76,6 +73,7 @@ bool overlaps(Frog frog, std::vector < Obstacle > curRow){
 bool died(Frog frog, std::vector < Obstacle > curRow){
     
     bool hitCar = false;
+    bool inWater = false;
     
     // Safe squares (start)
     if(frog.state.ypos < 3)
@@ -87,10 +85,10 @@ bool died(Frog frog, std::vector < Obstacle > curRow){
             hitCar = true;
     }
 
-    bool inWater = true;
     // River + top row
     if (frog.state.ypos > 16){
         // overlaps checks Obstacles in row
+        inWater = true;
         if (overlaps(frog, curRow)) {
             //TODO: need to account for turtles and gators.
             inWater = false;
@@ -106,6 +104,7 @@ bool died(Frog frog, std::vector < Obstacle > curRow){
 
 void endGame(){
    if (number_of_deaths == 3) {
+        // TODO: right now it just closes out when you run out of lives
         GLFWwindow* window;
         glfwDestroyWindow(window);
     
@@ -143,11 +142,15 @@ void animate()
           if(dead){
             frog.state.xpos = 11;
             frog.state.ypos = 2;
+            frog.frog_vert[0] = vec2( 12.0, 2.0 );
+            frog.frog_vert[1] = vec2( 11.0, 2.0 );
+            frog.frog_vert[2] = vec2( 12.0, 3.0 );
+            frog.frog_vert[3] = vec2( 11.0, 3.0 );
           }
        //   updateTimer();
         } else {
             endGame();
-          // move frog to start of level
+          // TODO: move frog to start of level
         }
     }
 }
@@ -266,7 +269,7 @@ int main(void)
 
     // Drawing obstacles
     for(int i=0; i<23; i++){
-        if ((i==2) || ((i==9) || (i==16) || (i=22)))
+        //if ((i==2) || ((i==9) || (i==16) || (i=22)))
         for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
             // Draw all obstacles
             (*it).gl_init();

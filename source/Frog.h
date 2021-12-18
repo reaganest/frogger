@@ -45,7 +45,6 @@ public:
         frog_vert[2].y += 1.0;
         frog_vert[3].y += 1.0;
         state.ypos += 1;
-        
     }
     inline void hopDown(){
         if(state.ypos>2){
