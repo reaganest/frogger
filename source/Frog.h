@@ -8,10 +8,10 @@ public:
     vec2 frog_vert[4]; //whatever number needed
     vec3 frog_color[4];
     struct {
-        int xpos;
+        float xpos;
         int ypos;
+        float velocity;
         vec2 cur_location;
-        
     } state;
     struct {
         GLuint vao;           //Vertex array object

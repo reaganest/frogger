@@ -19,15 +19,15 @@ Frog::Frog(){
     frog_vert[3] = vec2( 11.0 , 3.0);
 
     //frog position (based on bottom left corner)
-    state.xpos = 11;
+    state.xpos = 11.0;
     state.ypos = 2;
+    state.velocity = 0.0;
 
 };
 
 
 
 const int frog_size = { 4 };
-const int obstacle_size = { 4 };
 
 
 
@@ -36,6 +36,10 @@ const int obstacle_size = { 4 };
 //Called everytime an animation tick happens
 void Frog::update_state(){
   
+  // Accounts for log
+  state.xpos += state.velocity;
+  
+
   // Screen Wrapping:
   // Right side
   if((state.xpos)>22){
@@ -48,7 +52,7 @@ void Frog::update_state(){
     }
   }
   // Left Side
-  if((state.xpos)<0){
+  else if((state.xpos)<0){
     state.xpos = 22;
     for(int i=0; i<frog_size; i++){
       if(i%2)
@@ -57,6 +61,15 @@ void Frog::update_state(){
         frog_vert[i].x = 22.0;
     }
   }
+
+  // Not on side
+  else {
+    frog_vert[0].x = floor(state.xpos) + 1;
+    frog_vert[1].x = floor(state.xpos);
+    frog_vert[2].x = floor(state.xpos) + 1;
+    frog_vert[3].x = floor(state.xpos);
+  }
+
 }
 
 

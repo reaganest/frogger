@@ -63,7 +63,9 @@ bool overlaps(Frog frog, std::vector < Obstacle > curRow){
     */
     //TODO: make this work for obstacles with more than one square
     for(std::vector<Obstacle>::iterator it = curRow.begin(); it != curRow.end(); it++){
-        if(frog.state.xpos == floor((*it).ob_state.xpos))
+        int type = (*it).ob_state.type;
+        int length = (((type>0) && (type<4)) ? (1) : (0));
+        if((frog.state.xpos == floor((*it).ob_state.xpos)) || (frog.state.xpos == (floor((*it).ob_state.xpos + length))))
             return true;
     }
     return false;
@@ -92,7 +94,11 @@ bool died(Frog frog, std::vector < Obstacle > curRow){
         if (overlaps(frog, curRow)) {
             //TODO: need to account for turtles and gators.
             inWater = false;
+            // Frog follows log/turtle/gator if it's on it
+            frog.state.velocity = curRow[0].ob_state.velocity;
         }
+    } else {
+        frog.state.velocity = 0.0;
     }
     
     if (inWater || hitCar) {
@@ -190,6 +196,15 @@ int main(void)
   
   for(int i=0; i<23; i++){
       std::vector<Obstacle> row;
+
+      // Choosing obstacle's velocity
+      float vel;
+      if(i<17)
+        vel = ((i%2) ? (-1*(i/12.0)) : (i/12.0));
+      else
+        vel = ((i%2) ? (-1*((i-16)/5.0)) : ((i-16)/5.0));
+
+
       // Final row
       if(i>21)
         ;
@@ -199,12 +214,12 @@ int main(void)
         if(i%2) {
           for(int j=0; j<3; j++) {
             // Spawn log
-            row.push_back(Obstacle(1,((j*7) + 3), i, ((i!=19) ? (-1*((i+4.0)/10)) : ((i+4.0)/10))));
+            row.push_back(Obstacle(1,((j*7) + 3), i, vel));
           }
         } else {
           for(int j=0; j<4; j++) {
             // Spawn turtle
-            row.push_back(Obstacle(2,((j*5) + 3), i, ((i==18) ? (-1*((i+4.0)/10)) : ((i+4.0)/10))));
+            row.push_back(Obstacle(2,((j*5) + 3), i, vel));
           }
         }
       }
@@ -216,7 +231,7 @@ int main(void)
       // Road 2
       else if(i>9){
         for(int j=0; j<2; j++){
-          row.push_back(Obstacle(0,((j*11) + 3), i, ((i%2) ? (-1*((i+4.0)/10)) : ((i+4.0)/10))));
+          row.push_back(Obstacle(0,((j*11) + 3), i, vel));
         }
       }
 
@@ -227,12 +242,14 @@ int main(void)
       // Road 1
       else if(i>2){
         for(int j=0; j<2; j++){
-          row.push_back(Obstacle(0,((j*11) + 3), i, ((i%2) ? (-1*((i+4.0)/10)) : ((i+4.0)/10))));
+          row.push_back(Obstacle(0,((j*11) + 3), i, vel));
         }
       }
 
-      else
+      else if(i==1)
         ;
+
+      // else: spawn lives
 
       /*
       for(int j=0; j<2; j++){
@@ -269,7 +286,6 @@ int main(void)
 
     // Drawing obstacles
     for(int i=0; i<23; i++){
-        //if ((i==2) || ((i==9) || (i==16) || (i=22)))
         for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
             // Draw all obstacles
             (*it).gl_init();

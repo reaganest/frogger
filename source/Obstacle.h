@@ -29,12 +29,6 @@ public:
     
     inline void update_state() {
         // Update shape's position
-        /*
-        for (std::vector< vec2 >::iterator it = obstacles_vert.begin(); it != obstacles_vert.end(); ++it) {
-            (*it).x += this->ob_state.velocity;
-        }
-        */
-        //This will work fine for now, ignore stuff above
 
         // Update xpos
         ob_state.xpos += ob_state.velocity;
@@ -61,11 +55,38 @@ public:
                     obstacles_vert[i].x = 22.0;
             }
         }
-        
-        obstacles_vert[0].x = floor(ob_state.xpos) + 1;
+
         obstacles_vert[1].x = floor(ob_state.xpos);
-        obstacles_vert[2].x = floor(ob_state.xpos) + 1;
         obstacles_vert[3].x = floor(ob_state.xpos);
+        
+        switch(ob_state.type){
+          // Car
+          case(0):
+            obstacles_vert[0].x = floor(ob_state.xpos) + 1;
+            obstacles_vert[2].x = floor(ob_state.xpos) + 1;
+            break;
+          // Log
+          case(1):
+            obstacles_vert[0].x = floor(ob_state.xpos) + 2;
+            obstacles_vert[2].x = floor(ob_state.xpos) + 2;
+            break;
+          // Turtle
+          case(2):
+            obstacles_vert[0].x = floor(ob_state.xpos) + 2;
+            obstacles_vert[2].x = floor(ob_state.xpos) + 2;
+            break;
+          // Gator
+          case(3):
+            obstacles_vert[0].x = floor(ob_state.xpos) + 2;
+            obstacles_vert[2].x = floor(ob_state.xpos) + 2;
+            break;
+          //Snake
+          case(4):
+            obstacles_vert[0].x = floor(ob_state.xpos) + 1;
+            obstacles_vert[2].x = floor(ob_state.xpos) + 1;
+            break;
+        }
+        
         
 
         //TODO: updating turtle, gator, and snake's animation cycles
