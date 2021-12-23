@@ -101,7 +101,7 @@ void Background::gl_init(){
   glLinkProgram(GLvars.program);
   check_program_link(GLvars.program);
 glUseProgram(GLvars.program);
-  glBindFragDataLocation(GLvars.program, 0, "fragColor2");
+  glBindFragDataLocation(GLvars.program, 0, "fragColor3");
   
   GLvars.vpos_location   = glGetAttribLocation(GLvars.program, "vPos");
   GLvars.vtex_location = glGetAttribLocation(GLvars.program, "vTexCoord" );

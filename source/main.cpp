@@ -131,9 +131,10 @@ void init(){
 //Calls update 5 times a second
 void animate()
 {
+    
     if(glfwGetTime() > 0.2){
-        timer.timer_vert[1].x+=0.01;
-        timer.timer_vert[3].x+=0.01;
+        timer.timer_vert[1].x+=0.1;
+        timer.timer_vert[3].x+=0.1;
         glfwSetTime(0.0);
         if(number_of_deaths<3) {
           frog.update_state();
@@ -143,22 +144,19 @@ void animate()
                 (*it).update_state();
             }
           }
-          // Checking if frog has reached goal
-          //if(frog->state.ypos==22){
-            // Check each
-          //}
-          //obstacle.update_state();
-          int curRow = frog.state.ypos;
-          bool dead = died(frog, rows[curRow]);
-          if(dead){
-            frog.state.xpos = 11;
-            frog.state.ypos = 2;
-            frog.frog_vert[0] = vec2( 12.0, 2.0 );
-            frog.frog_vert[1] = vec2( 11.0, 2.0 );
-            frog.frog_vert[2] = vec2( 12.0, 3.0 );
-            frog.frog_vert[3] = vec2( 11.0, 3.0 );
-          }
-       //   updateTimer();
+            int curRow = frog.state.ypos;
+            bool dead = died(frog, rows[curRow]) || timer.timer_vert[1].x>22.9 || timer.timer_vert[3].x>22.9;
+            if(dead){
+              frog.state.xpos = 11;
+              frog.state.ypos = 2;
+              frog.frog_vert[0] = vec2( 12.0, 2.0 );
+              frog.frog_vert[1] = vec2( 11.0, 2.0 );
+              frog.frog_vert[2] = vec2( 12.0, 3.0 );
+              frog.frog_vert[3] = vec2( 11.0, 3.0 );
+                
+              timer.timer_vert[1] = vec2(11.0,0.0);
+              timer.timer_vert[3] = vec2( 11.0 , 1.0);
+            }
         } else {
             endGame();
           // TODO: move frog to start of level
@@ -289,6 +287,14 @@ int main(void)
     // Draw all the sprites here
       background.gl_init();
       background.draw(proj);
+      for(int i=0; i<23; i++){
+          for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
+              // Draw all obstacles
+              (*it).gl_init();
+              (*it).draw(proj);
+          }
+      }
+
       
       frog.gl_init();
       frog.draw(proj);
@@ -301,14 +307,7 @@ int main(void)
       timer.draw(proj);
       
       // Drawing obstacles
-      for(int i=0; i<23; i++){
-          for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
-              // Draw all obstacles
-              (*it).gl_init();
-              (*it).draw(proj);
-          }
-      }
-
+      
     glfwSwapBuffers(window);
     glfwPollEvents();
     
