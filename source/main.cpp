@@ -131,10 +131,9 @@ void init(){
 //Calls update 5 times a second
 void animate()
 {
-    
     if(glfwGetTime() > 0.2){
-        timer.timer_vert[1].x+=0.1;
-        timer.timer_vert[3].x+=0.1;
+        timer.timer_vert[1].x+=0.01;
+        timer.timer_vert[3].x+=0.01;
         glfwSetTime(0.0);
         if(number_of_deaths<3) {
           frog.update_state();
@@ -144,19 +143,126 @@ void animate()
                 (*it).update_state();
             }
           }
-            int curRow = frog.state.ypos;
-            bool dead = died(frog, rows[curRow]) || timer.timer_vert[1].x>22.9 || timer.timer_vert[3].x>22.9;
-            if(dead){
-              frog.state.xpos = 11;
-              frog.state.ypos = 2;
-              frog.frog_vert[0] = vec2( 12.0, 2.0 );
-              frog.frog_vert[1] = vec2( 11.0, 2.0 );
-              frog.frog_vert[2] = vec2( 12.0, 3.0 );
-              frog.frog_vert[3] = vec2( 11.0, 3.0 );
-                
-              timer.timer_vert[1] = vec2(11.0,0.0);
-              timer.timer_vert[3] = vec2( 11.0 , 1.0);
+          // Checking if frog has reached goal
+          //if(frog->state.ypos==22){
+            // Check each
+          //}
+          //obstacle.update_state();
+          int curRow = frog.state.ypos;
+          bool dead = died(frog, rows[curRow]);
+
+          
+
+          // Checking if Frog reached goal
+          if(frog.state.ypos == 22){
+            switch(frog.state.xpos){
+                case(3):
+                    if(!occupied[0]){
+                        dead = false;
+                        occupied[0] = true;
+                        // Move frog to start
+                        frog.state.xpos = 11;
+                        frog.state.ypos = 2;
+                        frog.frog_vert[0] = vec2( 12.0, 2.0 );
+                        frog.frog_vert[1] = vec2( 11.0, 2.0 );
+                        frog.frog_vert[2] = vec2( 12.0, 3.0 );
+                        frog.frog_vert[3] = vec2( 11.0, 3.0 );
+                        rows[22].push_back(Obstacle(0, 3, 22, 0.0));
+                        // Fill in space
+                    } else {
+                        dead = true;
+                    }
+                case(7):
+                    if(!occupied[1]){
+                        dead = false;
+                        occupied[1] = true;
+                        // Move frog to start
+                        frog.state.xpos = 11;
+                        frog.state.ypos = 2;
+                        frog.frog_vert[0] = vec2( 12.0, 2.0 );
+                        frog.frog_vert[1] = vec2( 11.0, 2.0 );
+                        frog.frog_vert[2] = vec2( 12.0, 3.0 );
+                        frog.frog_vert[3] = vec2( 11.0, 3.0 );
+                        rows[22].push_back(Obstacle(0, 7, 22, 0.0));
+                        // Fill in space
+                    } else {
+                        dead = true;
+                    }
+                case(11):
+                    if(!occupied[2]){
+                        dead = false;
+                        occupied[2] = true;
+                        // Move frog to start
+                        frog.state.xpos = 11;
+                        frog.state.ypos = 2;
+                        frog.frog_vert[0] = vec2( 12.0, 2.0 );
+                        frog.frog_vert[1] = vec2( 11.0, 2.0 );
+                        frog.frog_vert[2] = vec2( 12.0, 3.0 );
+                        frog.frog_vert[3] = vec2( 11.0, 3.0 );
+                        rows[22].push_back(Obstacle(0, 11, 22, 0.0));
+                        // Fill in space
+                    } else {
+                        dead = true;
+                    }
+                case(15):
+                    if(!occupied[3]){
+                        dead = false;
+                        occupied[3] = true;
+                        // Move frog to start
+                        frog.state.xpos = 11;
+                        frog.state.ypos = 2;
+                        frog.frog_vert[0] = vec2( 12.0, 2.0 );
+                        frog.frog_vert[1] = vec2( 11.0, 2.0 );
+                        frog.frog_vert[2] = vec2( 12.0, 3.0 );
+                        frog.frog_vert[3] = vec2( 11.0, 3.0 );
+                        rows[22].push_back(Obstacle(0, 15, 22, 0.0));
+                        // Fill in space
+                    } else {
+                        dead = true;
+                    }
+
+                case(19):
+                    if(!occupied[4]){
+                        dead = false;
+                        occupied[4] = true;
+                        // Move frog to start
+                        frog.state.xpos = 11;
+                        frog.state.ypos = 2;
+                        frog.frog_vert[0] = vec2( 12.0, 2.0 );
+                        frog.frog_vert[1] = vec2( 11.0, 2.0 );
+                        frog.frog_vert[2] = vec2( 12.0, 3.0 );
+                        frog.frog_vert[3] = vec2( 11.0, 3.0 );
+                        rows[22].push_back(Obstacle(0, 19, 22, 0.0));
+                        // Fill in space
+                    } else {
+                        dead = true;
+                    }
+
+                default:
+                    dead = true;
             }
+          }
+
+          // Check if game is won
+          bool truth = true;
+          for(int i=0; i<5; i++){
+            truth = truth && occupied[i];
+          }
+          if(truth==true){
+            // Victory
+            endGame();
+          }
+
+          // Check if frog is dead
+          if(dead){
+            frog.state.xpos = 11;
+            frog.state.ypos = 2;
+            frog.frog_vert[0] = vec2( 12.0, 2.0 );
+            frog.frog_vert[1] = vec2( 11.0, 2.0 );
+            frog.frog_vert[2] = vec2( 12.0, 3.0 );
+            frog.frog_vert[3] = vec2( 11.0, 3.0 );
+          }
+       //   updateTimer();
         } else {
             endGame();
           // TODO: move frog to start of level
@@ -203,9 +309,9 @@ int main(void)
       // Choosing obstacle's velocity
       float vel;
       if(i<17)
-        vel = ((i%2) ? (-1*(i/12.0)) : (i/12.0));
+        vel = ((i%2) ? (-1*(i/30.0)) : (i/30.0));
       else
-        vel = ((i%2) ? (-1*((i-16)/5.0)) : ((i-16)/5.0));
+        vel = ((i%2) ? (-1*((i-16)/40.0)) : ((i-16)/40.0));
 
 
       // Final row
@@ -287,6 +393,8 @@ int main(void)
     // Draw all the sprites here
       background.gl_init();
       background.draw(proj);
+      
+      // Drawing obstacles
       for(int i=0; i<23; i++){
           for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
               // Draw all obstacles
@@ -295,7 +403,6 @@ int main(void)
           }
       }
 
-      
       frog.gl_init();
       frog.draw(proj);
 
@@ -306,8 +413,8 @@ int main(void)
       timer.gl_init();
       timer.draw(proj);
       
-      // Drawing obstacles
       
+
     glfwSwapBuffers(window);
     glfwPollEvents();
     
@@ -318,3 +425,4 @@ int main(void)
   glfwTerminate();
   exit(EXIT_SUCCESS);
 }
+

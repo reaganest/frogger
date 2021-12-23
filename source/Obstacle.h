@@ -99,7 +99,7 @@ public:
         */
 
     }
-
+    void loadFreeImageTexture(const char* lpszPathName, GLuint textureID, GLuint GLtex);
     int getXpos(){ return ob_state.xpos; }
     int getYpos(){ return ob_state.ypos; }
     float getVelocity(){ return ob_state.velocity; }
