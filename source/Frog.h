@@ -10,6 +10,7 @@ public:
     struct {
         int xpos;
         int ypos;
+        float velocity;
         vec2 cur_location;
         
     } state;
@@ -18,7 +19,7 @@ public:
         GLuint program;       //shader program
         GLuint buffer;        //Vertex buffer objects
         GLuint vertex_shader, fragment_shader;  //Shaders
-        GLint vpos_location, vcolor_location;   //reference to pos and color in shaders
+        GLint vpos_location, vtex_location;   //reference to pos and color in shaders
         GLint M_location;     //Reference to matrix in shader
     } GLvars;
 //public:
@@ -57,6 +58,7 @@ public:
             state.ypos -= 1;
         }
     }
+    void loadFreeImageTexture(const char* lpszPathName, GLuint textureID, GLuint GLtex);
     void update_state();
       
     void gl_init();

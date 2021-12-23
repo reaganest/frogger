@@ -1,6 +1,6 @@
 //
 //  common.h
-//  Asteroids
+//  Frogger
 //
 //  Created by Brian Summa on 9/7/15.
 //
@@ -17,13 +17,14 @@
 #include <list>
 #include <vector>
 #include "utils/Angel.h"
+#include "utils/lodepng.h"
 
 using namespace Angel;
 
-#include "shader.h"
 #include "Frog.h"
+#include "Background.h"
+#include "Timer.h"
 #include "Obstacle.h"
-
 
 
 #endif

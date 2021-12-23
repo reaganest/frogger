@@ -1,9 +1,15 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-//  --- shader.cpp ---
+//  --- shader.h ---
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "shader.h"
+#ifndef __SOURCEPATH_H__
+#define __SOURCEPATH_H__
 
-std::string shader_path = "/Users/reaganesteves/Documents/GitHub/frogger/shaders/";
+#include <string>
+
+extern std::string source_path;
+
+
+#endif // __SHADER_H__

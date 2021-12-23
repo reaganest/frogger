@@ -17,8 +17,8 @@ add_library(glad "${CMAKE_SOURCE_DIR}/glfw-3.2/deps/glad/glad.h"
 				 
 link_libraries(glad)
 
-SET(MY_SHADER_PATH ${CMAKE_SOURCE_DIR}/shaders/)
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/shaders/shader.cpp.in ${CMAKE_SOURCE_DIR}/shaders/shader.cpp)	
+SET(MY_SOURCE_PATH ${CMAKE_SOURCE_DIR})
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/source/utils/SourcePath.cpp.in ${CMAKE_SOURCE_DIR}/source/utils/SourcePath.cpp)
 
 
 include_directories(${CMAKE_SOURCE_DIR}/source
@@ -28,15 +28,25 @@ include_directories(${CMAKE_SOURCE_DIR}/source
 add_executable(frogger WIN32 MACOSX_BUNDLE 
 	source/common.h
 	source/utils/Angel.h
+     source/utils/lodepng.h
+          source/utils/Sourcepath.h
+                    source/utils/Sourcepath.cpp
+                        source/utils/lodepng.cpp
 	source/utils/CheckError.h
 	source/utils/mat.h
 	source/utils/vec.h
 	source/utils/u8names.h
 	source/utils/u8names.cpp
-	shaders/shader.cpp
 	source/main.cpp
 	source/Frog.cpp
-	source/Frog.h 
+	source/Frog.h
+     source/loadimage.h
+     source/Background.cpp
+    source/Background.h
+    source/Obstacle.cpp
+    source/Obstacle.h
+    source/Timer.cpp
+    source/Timer.h
 	shaders/fshader.glsl
 	shaders/vshader.glsl)
 	

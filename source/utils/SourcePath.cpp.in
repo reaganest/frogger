@@ -1,15 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-//  --- shader.h ---
+//  --- shader.cpp ---
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef __SHADER_H__
-#define __SHADER_H__
+#include "SourcePath.h"
 
-#include <string>
-
-std::string shader_path = "@MY_SHADER_PATH@";
-
-
-#endif // __SHADER_H__
+std::string source_path = "@MY_SOURCE_PATH@";

@@ -1,14 +1,23 @@
 // CPP file for Obstacle
-
 #include "common.h"
+#include "utils/lodepng.h"
+#include "utils/SourcePath.h"
 
 // obstacle constructor
-Obstacle::Obstacle(int type){
-    
-    // obstacle type
-    this->ob_state.type = type;
+Obstacle::Obstacle(int type, float xpos, int ypos, float velocity){
+    Obstacle * obstacle;
 
-    switch(this->ob_state.type){
+    // setting x and y position
+    ob_state.xpos = xpos;
+    ob_state.ypos = ypos;
+
+    // setting velocity
+    ob_state.velocity = velocity;
+
+    // obstacle type
+    ob_state.type = type;
+
+    /*switch(this->ob_state.type){
         case(0):
             // Car
         case(1):
@@ -20,23 +29,27 @@ Obstacle::Obstacle(int type){
         case(4):
             // Snake
     }
-
+    */
     // obstacle colors (will be different later)
-    obstacles_color[0] = vec3( 0.588, 0.294, 0.0 );
-    obstacles_color[1] = vec3( 0.588, 0.294, 0.0 );
-    obstacles_color[2] = vec3( 0.588, 0.294, 0.0 );
-    obstacles_color[3] = vec3( 0.588, 0.294, 0.0 );
+    obstacles_color[0] = vec3( 1.0, 1.0, 1.0 );
+    obstacles_color[1] = vec3( 1.0, 1.0, 1.0 );
+    obstacles_color[2] = vec3( 1.0, 1.0, 1.0 );
+    obstacles_color[3] = vec3( 1.0, 1.0, 1.0 );
+
+    obstacles_vert[0] = vec2( ob_state.xpos + 1.0, ob_state.ypos);
+    obstacles_vert[1] = vec2( ob_state.xpos, ob_state.ypos);
+    obstacles_vert[2] = vec2( ob_state.xpos + 1.0, ob_state.ypos + 1.0);
+    obstacles_vert[3] = vec2( ob_state.xpos, ob_state.ypos + 1.0);
 };
 
 const int obstacle_size = { 4 };
 
-// Implemented in header
-//void Obstacle::update_state();
-
 void Obstacle::gl_init(){
+    glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   
-  std::string vshader = shader_path + "vshader.glsl";
-  std::string fshader = shader_path + "fshader.glsl";
+  std::string vshader = source_path + "/shaders/vshader.glsl";
+  std::string fshader = source_path + "/shaders/fshader.glsl";
   
   GLchar* vertex_shader_source = readShaderSource(vshader.c_str());
   GLchar* fragment_shader_source = readShaderSource(fshader.c_str());
@@ -92,7 +105,7 @@ void Obstacle::gl_init(){
 }
 
 void Obstacle::draw(mat4 proj){
-
+    glEnable(GL_COLOR_MATERIAL);
     glUseProgram( GLvars2.program );
     glBindVertexArray( GLvars2.vao );
 

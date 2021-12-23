@@ -4,41 +4,11 @@
 #include "utils/SourcePath.h"
 
 //GLuint texId;
-GLuint frog_texture;
+GLuint background_texture;
 
 
 using namespace Angel;
-
-
-#ifdef _WIN32
-static
-unsigned int lodepng_decode_wfopen(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
-  const std::string& filename,
-  LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8)
-{
-  std::wstring wcfn;
-  if (u8names_towc(filename.c_str(), wcfn) != 0)
-    return 78;
-  FILE* fp = _wfopen(wcfn.c_str(), L"rb");
-  if (fp == NULL) { return 78; }
-
-  std::vector<unsigned char> buf;
-  fseek(fp, 0L, SEEK_END);
-  long const size = ftell(fp);
-  if (size < 0) {
-    fclose(fp);
-    return 78;
-  }
-
-  fseek(fp, 0L, SEEK_SET);
-  buf.resize(size);
-  fread(buf.data(), 1, size, fp);
-  fclose(fp);
-
-  return lodepng::decode(out, w, h, buf, colortype, bitdepth);
-}
-#endif //_WIN32
-void Frog::loadFreeImageTexture(const char* lpszPathName, GLuint textureID, GLuint GLtex){
+void Background::loadFreeImageTexture(const char* lpszPathName, GLuint textureID, GLuint GLtex){
   
   std::vector<unsigned char> image;
   unsigned int width;
@@ -78,88 +48,35 @@ void Frog::loadFreeImageTexture(const char* lpszPathName, GLuint textureID, GLui
   image.clear();
 
 }
-
-
-//frog constructor
-Frog::Frog(){
-    Frog * frog;
+//background constructor
+Background::Background(){
+    Background * Background;
     
-    //frog colors
-    frog_color[0] = vec3( 0.0, 1.0, 0.0);
-    frog_color[1] = vec3( 1.0, 1.0, 0.0);
-    frog_color[2] = vec3( 0.0, 0.0, 0.0);
-    frog_color[3] = vec3( 1.0, 0.0, 0.0);
+    //background colors
+    background_color[0] = vec3( 0.0, 1.0, 0.0);
+    background_color[1] = vec3( 1.0, 1.0, 0.0);
+    background_color[2] = vec3( 0.0, 0.0, 0.0);
+    background_color[3] = vec3( 1.0, 0.0, 0.0);
     
-    //frog verts
-    frog_vert[0] = vec2( 12.0, 2.0);
-    frog_vert[1] = vec2(11.0, 2.0);
-    frog_vert[2] = vec2(12.0, 3.0);
-   frog_vert[3] = vec2( 11.0 , 3.0);
+    //background verts
+    background_vert[0] = vec2( 23.0, 0.0);
+    background_vert[1] = vec2(0.0, 0.0);
+    background_vert[2] = vec2(23.0, 23.0);
+   background_vert[3] = vec2( 0.0 , 23.0);
     
 
-    //frog position (based on bottom left corner)
-    state.xpos = 11;
-    state.ypos = 2;
-
+    
 };
 
 
 
-const int frog_size = { 4 };
-const int obstacle_size = { 4 };
-
-
-
-
-
-//Called everytime an animation tick happens
-void Frog::update_state(){
-  
-  // Screen Wrapping:
-  // Right side
-    // Accounts for log
-    state.xpos += state.velocity;
-    
-
-    // Screen Wrapping:
-    // Right side
-    if((state.xpos)>22){
-      state.xpos = 0;
-      for(int i=0; i<frog_size; i++){
-        if(i%2)
-          frog_vert[i].x = 1.0;
-        else
-          frog_vert[i].x = 0.0;
-      }
-    }
-    // Left Side
-    else if((state.xpos)<0){
-      state.xpos = 22;
-      for(int i=0; i<frog_size; i++){
-        if(i%2)
-          frog_vert[i].x = 23.0;
-        else
-          frog_vert[i].x = 22.0;
-      }
-    }
-
-    // Not on side
-    else {
-      frog_vert[0].x = floor(state.xpos) + 1;
-      frog_vert[1].x = floor(state.xpos);
-      frog_vert[2].x = floor(state.xpos) + 1;
-      frog_vert[3].x = floor(state.xpos);
-    }
-
-  }
-
+const int background_size = { 4 };
 
 //Initialize the gl state and variables
-void Frog::gl_init(){
-    Frog frog;
-  //!!!!!!!!Populate frog_vert and frog_color
-  size_t frog_bytes = sizeof(frog_vert);
-  size_t frog_color_bytes = sizeof(frog_color);
+void Background::gl_init(){
+  //!!!!!!!!Populate background_vert and background_color
+  size_t background_bytes = sizeof(background_vert);
+  size_t background_color_bytes = sizeof(background_color);
   
   std::string vshader = source_path + "/shaders/vshader.glsl";
   std::string fshader = source_path + "/shaders/fshader.glsl";
@@ -195,11 +112,11 @@ glUseProgram(GLvars.program);
     //Generate buffer to hold our vertex data
     glGenBuffers( 1, &GLvars.buffer );
  
-    glGenTextures( 1, &frog_texture );
+    glGenTextures( 1, &background_texture );
     
-    std::string frog_img = source_path + "/images/frog.png" ;
-      loadFreeImageTexture(frog_img.c_str(), frog_texture, GL_TEXTURE1);
-      glUniform1i( glGetUniformLocation(GLvars.program, "textureFrog"), 1 );
+    std::string background_img = source_path + "/images/background.png" ;
+      loadFreeImageTexture(background_img.c_str(), background_texture, GL_TEXTURE0);
+      glUniform1i( glGetUniformLocation(GLvars.program, "textureBackground"), 0 );
   
     //Set GL state to use vertex array object
     glBindVertexArray( GLvars.vao );
@@ -207,25 +124,25 @@ glUseProgram(GLvars.program);
   glBindBuffer( GL_ARRAY_BUFFER, GLvars.buffer );
   
   //Create GPU buffer to hold vertices and color
-  glBufferData( GL_ARRAY_BUFFER, frog_bytes+ frog_color_bytes, NULL, GL_STATIC_DRAW );
+  glBufferData( GL_ARRAY_BUFFER, background_bytes+ background_color_bytes, NULL, GL_STATIC_DRAW );
   //First part of array holds vertices
-  glBufferSubData( GL_ARRAY_BUFFER, 0, frog_bytes, frog_vert );
+  glBufferSubData( GL_ARRAY_BUFFER, 0, background_bytes, background_vert );
   //Second part of array hold colors (offset by sizeof(triangle))
-  glBufferSubData( GL_ARRAY_BUFFER, frog_bytes, frog_color_bytes, frog_color );
+  glBufferSubData( GL_ARRAY_BUFFER, background_bytes, background_color_bytes, background_color );
   
   glEnableVertexAttribArray(GLvars.vpos_location);
   glEnableVertexAttribArray(GLvars.vtex_location );
   
   glVertexAttribPointer( GLvars.vpos_location, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
-    glVertexAttribPointer( GLvars.vtex_location, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(frog_bytes) );
+    glVertexAttribPointer( GLvars.vtex_location, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(background_bytes) );
   
   glBindVertexArray(0);
 }
 
 
 
-//Draw a frog
-void Frog::draw(mat4 proj){
+//Draw a background
+void Background::draw(mat4 proj){
   
   glUseProgram( GLvars.program );
    // glBindTexture( GL_TEXTURE_2D, texId );
@@ -239,6 +156,7 @@ void Frog::draw(mat4 proj){
     
   
   glBindVertexArray(0);
+   // glBindTexture( GL_TEXTURE_2D, 0 );
   glUseProgram(0);
 
 }
