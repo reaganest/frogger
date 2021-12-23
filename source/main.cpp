@@ -5,8 +5,6 @@ using namespace Angel;
 
 // Initialize frog
 Frog frog;
-Background background;
-Timer timer;
 // Initialize ows of obstacles
 std::vector< std::vector<Obstacle> > rows;
 
@@ -125,15 +123,12 @@ void init(){
   glHint (GL_LINE_SMOOTH_HINT, GL_NICEST);
   glHint (GL_POINT_SMOOTH_HINT, GL_NICEST);
   frog.gl_init();
-    timer.gl_init();
 }
 
 //Calls update 5 times a second
 void animate()
 {
     if(glfwGetTime() > 0.2){
-        timer.timer_vert[1].x+=0.01;
-        timer.timer_vert[3].x+=0.01;
         glfwSetTime(0.0);
         if(number_of_deaths<3) {
           frog.update_state();
@@ -285,29 +280,22 @@ int main(void)
     
     glClear(GL_COLOR_BUFFER_BIT);
 
-      
+     
     // Draw all the sprites here
-      background.gl_init();
-      background.draw(proj);
-      
-      frog.gl_init();
-      frog.draw(proj);
+    
 
-   
+    // Drawing obstacles
+    for(int i=0; i<23; i++){
+        for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
+            // Draw all obstacles
+            (*it).gl_init();
+            (*it).draw(proj);
+        }
+    }
     
     // Drawing frog
-    
-      timer.gl_init();
-      timer.draw(proj);
-      
-      // Drawing obstacles
-      for(int i=0; i<23; i++){
-          for(std::vector<Obstacle>::iterator it = rows[i].begin(); it != rows[i].end(); it++){
-              // Draw all obstacles
-              (*it).gl_init();
-              (*it).draw(proj);
-          }
-      }
+    frog.gl_init();
+    frog.draw(proj);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
