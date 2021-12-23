@@ -8,10 +8,11 @@ public:
     vec2 frog_vert[4]; //whatever number needed
     vec3 frog_color[4];
     struct {
-        float xpos;
+        int xpos;
         int ypos;
         float velocity;
         vec2 cur_location;
+        
     } state;
     struct {
         GLuint vao;           //Vertex array object
@@ -21,6 +22,7 @@ public:
         GLint vpos_location, vtex_location;   //reference to pos and color in shaders
         GLint M_location;     //Reference to matrix in shader
     } GLvars;
+//public:
     Frog();
     
     // hopRight and hopLeft controlled by 1/21 (by columns/width) 
@@ -45,6 +47,7 @@ public:
         frog_vert[2].y += 1.0;
         frog_vert[3].y += 1.0;
         state.ypos += 1;
+        
     }
     inline void hopDown(){
         if(state.ypos>2){
